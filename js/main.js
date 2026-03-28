@@ -22,27 +22,46 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Анимация при прокрутке
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+const statsObserverOptions = {
+    threshold: 0.05,
+    rootMargin: '0px 0px 50px 0px'
 };
 
-const observer = new IntersectionObserver((entries) => {
+const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
         }
     });
-}, observerOptions);
+}, statsObserverOptions);
 
-document.querySelectorAll('.work-card, .stat-card').forEach(el => {
+const worksObserverOptions = {
+    threshold: 0.05,
+    rootMargin: '0px 0px 100px 0px'
+};
+
+const worksObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, worksObserverOptions);
+
+document.querySelectorAll('.work-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
+    el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    worksObserver.observe(el);
 });
-
+document.querySelectorAll('.stat-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    statsObserver.observe(el);
+});
 // Загрузка страницы
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Сайт загружен');
@@ -55,6 +74,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const linkPage = link.getAttribute('href');
         if (linkPage === currentPage) {
             link.classList.add('active');
+        }
+    });
+});
+
+// Оптимизация загрузки картинок
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.work-image img');
+
+    images.forEach(img => {
+        // Добавляем родителю класс loading
+        const parent = img.parentElement;
+        parent.classList.add('loading');
+
+        // Когда картинка загрузилась - убираем скелетон
+        img.onload = () => {
+            parent.classList.remove('loading');
+        };
+
+        // Если картинка уже загружена из кэша
+        if (img.complete) {
+            parent.classList.remove('loading');
         }
     });
 });
