@@ -755,3 +755,231 @@ body {
         background-position: -200% 0;
     }
 }
+/* ========== СТРАНИЦА КОНТАКТОВ ========== */
+.page-header {
+    padding: 150px 0 60px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--primary-dark) 100%);
+}
+
+.page-title {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--text-primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contacts-section {
+    padding: 80px 0;
+}
+
+.contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+}
+
+/* Контактные карточки */
+.contacts-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.info-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 1.8rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+    .info-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(233, 69, 96, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+.info-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.info-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: var(--accent);
+}
+
+.info-card p, .info-card a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    line-height: 1.6;
+}
+
+    .info-card a:hover {
+        color: var(--accent);
+    }
+
+.contacts-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.contact-social-link {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+    .contact-social-link:hover {
+        background: var(--accent);
+        color: white !important;
+    }
+
+/* Форма */
+.contact-form-wrapper {
+    background: var(--bg-card);
+    border-radius: 30px;
+    padding: 2.5rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.contact-form h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 1rem 0.5rem 0.5rem;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        color: var(--text-primary);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        outline: none;
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    .form-group label {
+        position: absolute;
+        left: 0.5rem;
+        top: 1rem;
+        color: var(--text-secondary);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        pointer-events: none;
+    }
+
+    .form-group input:focus ~ label,
+    .form-group input:valid ~ label,
+    .form-group textarea:focus ~ label,
+    .form-group textarea:valid ~ label {
+        top: -0.5rem;
+        font-size: 0.8rem;
+        color: var(--accent);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        border-bottom-color: var(--accent);
+    }
+
+.submit-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.form-note {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+}
+
+/* Карта */
+.map-section {
+    padding: 40px 0 80px;
+}
+
+.map-wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.map-placeholder {
+    background: var(--primary-dark);
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--text-secondary);
+}
+
+    .map-placeholder span {
+        font-size: 4rem;
+        opacity: 0.5;
+    }
+
+/* Адаптивность для контактов */
+@media (max-width: 968px) {
+    .contacts-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+    }
+
+    .contact-form-wrapper {
+        padding: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        padding: 120px 0 40px;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .contacts-section {
+        padding: 50px 0;
+    }
+}
