@@ -993,7 +993,7 @@ body {
 .page-title-portfolio {
     font-size: 3.5rem;
     margin-bottom: 1rem;
-    background: linear-gradient( 270deg, var(--accent), #ff8c42, #ff6b6b, var(--accent-light), var(--accent) );
+    background: linear-gradient( 270deg, var(--accent), #ff8c42, #ffffff, var(--accent-light), var(--accent) );
     background-size: 400% auto;
     -webkit-background-clip: text;
     background-clip: text;
