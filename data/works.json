@@ -1,0 +1,64 @@
+{
+  "1": {
+    "title": "Название проекта 1",
+    "category": "Веб-сайт",
+    "year": "2024",
+    "client": "Клиент 1",
+    "platform": "Web",
+    "role": "Lead Designer & Developer",
+    "technologies": [ "HTML5", "CSS3", "JavaScript", "React" ],
+    "liveLink": "#",
+    "githubLink": "#",
+    "description": "Полное описание проекта 1. Здесь рассказывается о том, что было сделано, какие задачи решались и какие результаты были достигнуты.",
+    "task": "Создать современный корпоративный сайт с админ-панелью, который будет отлично выглядеть на всех устройствах.",
+    "solution": "Разработали адаптивный дизайн, использовали React для динамического контента, создали удобную админ-панель.",
+    "result": "Клиент получил современный сайт, который увеличил конверсию на 30%.",
+    "images": [
+      "../images/work1.jpg",
+      "../images/work2.jpg",
+      "../images/work3.jpg",
+      "../images/work4.jpg",
+      "../images/work5.jpg"
+    ]
+  },
+  "2": {
+    "title": "Название проекта 2",
+    "category": "UI/UX Дизайн",
+    "year": "2024",
+    "client": "Клиент 2",
+    "platform": "Mobile, Web",
+    "role": "UX/UI Designer",
+    "technologies": [ "Figma", "Adobe XD", "Principle", "Miro" ],
+    "liveLink": "#",
+    "githubLink": "#",
+    "description": "Полное описание проекта 2. Разработка дизайна мобильного приложения с фокусом на пользовательский опыт.",
+    "task": "Создать удобный и красивый интерфейс для мобильного приложения.",
+    "solution": "Провели исследование пользователей, создали прототипы, протестировали гипотезы.",
+    "result": "Приложение получило высокие оценки пользователей в App Store.",
+    "images": [
+      "../images/work2.jpg",
+      "../images/work1.jpg",
+      "../images/work3.jpg"
+    ]
+  },
+  "3": {
+    "title": "Название проекта 3",
+    "category": "Брендинг",
+    "year": "2023",
+    "client": "Клиент 3",
+    "platform": "All platforms",
+    "role": "Brand Designer",
+    "technologies": [ "Illustrator", "Photoshop", "After Effects" ],
+    "liveLink": "#",
+    "githubLink": "#",
+    "description": "Полное описание проекта 3. Разработка полного бренда компании.",
+    "task": "Создать узнаваемый бренд с нуля.",
+    "solution": "Разработали логотип, цветовую схему, типографику и айдентику.",
+    "result": "Бренд стал узнаваемым на рынке.",
+    "images": [
+      "../images/work3.jpg",
+      "../images/work1.jpg",
+      "../images/work2.jpg"
+    ]
+  }
+}

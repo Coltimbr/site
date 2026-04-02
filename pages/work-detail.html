@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Название работы | Ваше портфолио</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Swiper CSS для слайдера -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="../index.html">Ваше Имя</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Главная</a></li>
+                <li><a href="portfolio.html">Работы</a></li>
+                <li><a href="about.html">О себе</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Хлебные крошки -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <a href="../index.html">Главная</a> /
+            <a href="portfolio.html">Работы</a> /
+            <span id="workTitle">Название работы</span>
+        </div>
+    </section>
+
+    <!-- Заголовок работы -->
+    <section class="work-header">
+        <div class="container">
+            <h1 class="work-title" id="workMainTitle">Название проекта</h1>
+            <div class="work-meta">
+                <span class="work-category" id="workCategory">Веб-сайт</span>
+                <span class="work-year" id="workYear">2024</span>
+                <span class="work-client" id="workClient">Клиент: Название компании</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Слайдер с фото -->
+    <section class="work-slider-section">
+        <div class="container">
+            <div class="swiper workSwiper">
+                <div class="swiper-wrapper" id="workSlider">
+                    <!-- Слайды будут добавляться через JS -->
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Миниатюры (опционально) -->
+    <div class="work-thumbnails">
+        <div class="container">
+            <div class="thumbnails-wrapper" id="thumbnails">
+                <!-- Миниатюры будут добавляться через JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Описание работы -->
+    <section class="work-description-section">
+        <div class="container">
+            <div class="work-description-grid">
+                <div class="work-description">
+                    <h2>О проекте</h2>
+                    <div id="workDescription">
+                        <p>Здесь будет подробное описание проекта. Что было сделано, какие задачи решались, какие технологии использовались.</p>
+                        <p>Можно добавить несколько абзацев текста, чтобы подробно рассказать о процессе работы.</p>
+                    </div>
+
+                    <div class="work-details">
+                        <div class="detail-block">
+                            <h3>Задача</h3>
+                            <p id="workTask">Описание задачи, которую нужно было решить</p>
+                        </div>
+                        <div class="detail-block">
+                            <h3>Решение</h3>
+                            <p id="workSolution">Как была решена задача, какие подходы использовались</p>
+                        </div>
+                        <div class="detail-block">
+                            <h3>Результат</h3>
+                            <p id="workResult">Какие результаты были достигнуты</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="work-sidebar">
+                    <div class="sidebar-card">
+                        <h3>Информация о проекте</h3>
+                        <ul class="project-info-list">
+                            <li><strong>Клиент:</strong> <span id="sidebarClient">Название компании</span></li>
+                            <li><strong>Год:</strong> <span id="sidebarYear">2024</span></li>
+                            <li><strong>Категория:</strong> <span id="sidebarCategory">Веб-сайт</span></li>
+                            <li><strong>Платформа:</strong> <span id="sidebarPlatform">Web, Desktop</span></li>
+                            <li><strong>Роль:</strong> <span id="sidebarRole">Lead Designer & Developer</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3>Технологии</h3>
+                        <div class="tech-tags" id="techTags">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                            <span>React</span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3>Ссылки</h3>
+                        <div class="project-links">
+                            <a href="#" id="liveLink" class="project-link-btn" target="_blank">
+                                <span>🌐</span> Смотреть live demo
+                            </a>
+                            <a href="#" id="githubLink" class="project-link-btn" target="_blank">
+                                <span>💻</span> GitHub репозиторий
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Другие проекты -->
+    <section class="other-projects">
+        <div class="container">
+            <h2 class="section-title">Другие проекты</h2>
+            <div class="other-projects-grid" id="otherProjects">
+                <!-- Другие проекты будут подгружаться -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Ваше Имя. Все права защищены.</p>
+                <div class="social-links">
+                    <a href="#" target="_blank">Instagram</a>
+                    <a href="#" target="_blank">Behance</a>
+                    <a href="#" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+
+    <script>
+        // Получаем ID работы из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const workId = urlParams.get('id');
+
+        // Загружаем данные из JSON файла
+        let worksData = {};
+
+        fetch('../data/works.json')
+            .then(response => response.json())
+            .then(data => {
+                worksData = data;
+                loadWorkData();
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки данных:', error);
+                showError();
+            });
+
+        function loadWorkData() {
+            const work = worksData[workId];
+
+            if (work) {
+                // Заполняем заголовки
+                document.title = `${work.title} | Ваше портфолио`;
+                document.getElementById('workTitle').textContent = work.title;
+                document.getElementById('workMainTitle').textContent = work.title;
+                document.getElementById('workCategory').textContent = work.category;
+                document.getElementById('workYear').textContent = work.year;
+                document.getElementById('workClient').textContent = `Клиент: ${work.client}`;
+
+                // Заполняем описание
+                document.getElementById('workDescription').innerHTML = `<p>${work.description}</p>`;
+                document.getElementById('workTask').textContent = work.task;
+                document.getElementById('workSolution').textContent = work.solution;
+                document.getElementById('workResult').textContent = work.result;
+
+                // Заполняем сайдбар
+                document.getElementById('sidebarClient').textContent = work.client;
+                document.getElementById('sidebarYear').textContent = work.year;
+                document.getElementById('sidebarCategory').textContent = work.category;
+                document.getElementById('sidebarPlatform').textContent = work.platform;
+                document.getElementById('sidebarRole').textContent = work.role;
+
+                // Заполняем технологии
+                const techTags = document.getElementById('techTags');
+                techTags.innerHTML = work.technologies.map(tech => `<span>${tech}</span>`).join('');
+
+                // Заполняем ссылки
+                document.getElementById('liveLink').href = work.liveLink;
+                document.getElementById('githubLink').href = work.githubLink;
+
+                // Создаем слайдер
+                const sliderWrapper = document.getElementById('workSlider');
+                const thumbnailsWrapper = document.getElementById('thumbnails');
+
+                work.images.forEach((img, index) => {
+                    // Добавляем слайд
+                    const slide = document.createElement('div');
+                    slide.className = 'swiper-slide';
+                    slide.innerHTML = `
+                        <div class="slider-image-wrapper">
+                            <img src="${img}" alt="${work.title} - фото ${index + 1}">
+                        </div>
+                    `;
+                    sliderWrapper.appendChild(slide);
+
+                    // Добавляем миниатюру
+                    const thumbnail = document.createElement('div');
+                    thumbnail.className = 'thumbnail';
+                    thumbnail.setAttribute('data-index', index);
+                    thumbnail.innerHTML = `<img src="${img}" alt="Миниатюра ${index + 1}">`;
+                    thumbnailsWrapper.appendChild(thumbnail);
+                });
+
+                // Инициализируем Swiper
+                const swiper = new Swiper('.workSwiper', {
+                    loop: true,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    effect: 'slide',
+                    speed: 800,
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    },
+                });
+
+                // Клик по миниатюре
+                document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+                    thumb.addEventListener('click', () => {
+                        swiper.slideTo(index);
+                    });
+                });
+
+                // Активация текущей миниатюры при смене слайда
+                swiper.on('slideChange', () => {
+                    const activeIndex = swiper.realIndex;
+                    document.querySelectorAll('.thumbnail').forEach((thumb, idx) => {
+                        if (idx === activeIndex) {
+                            thumb.classList.add('active');
+                        } else {
+                            thumb.classList.remove('active');
+                        }
+                    });
+                });
+
+                // Активируем первую миниатюру
+                if (document.querySelectorAll('.thumbnail').length > 0) {
+                    document.querySelectorAll('.thumbnail')[0].classList.add('active');
+                }
+            } else {
+                showError();
+            }
+
+            // Загружаем другие проекты (первые 3, исключая текущий)
+            loadOtherProjects();
+        }
+
+        function loadOtherProjects() {
+            const otherProjectsGrid = document.getElementById('otherProjects');
+            if (otherProjectsGrid && worksData) {
+                const otherWorks = Object.entries(worksData)
+                    .filter(([id]) => id !== workId)
+                    .slice(0, 3);
+
+                otherWorks.forEach(([id, project]) => {
+                    const projectCard = document.createElement('div');
+                    projectCard.className = 'other-project-card';
+                    projectCard.innerHTML = `
+                        <img src="${project.images[0]}" alt="${project.title}">
+                        <div class="other-project-info">
+                            <h3>${project.title}</h3>
+                            <p>${project.category}</p>
+                            <a href="work-detail.html?id=${id}" class="work-link">Смотреть проект →</a>
+                        </div>
+                    `;
+                    otherProjectsGrid.appendChild(projectCard);
+                });
+            }
+        }
+
+        function showError() {
+            const errorHtml = `
+                <div class="container" style="text-align: center; padding: 100px 0;">
+                    <h1 style="font-size: 3rem; margin-bottom: 1rem;">😕</h1>
+                    <h2>Работа не найдена</h2>
+                    <p>Извините, запрашиваемая работа не существует.</p>
+                    <a href="portfolio.html" class="btn btn-primary" style="margin-top: 2rem;">Вернуться к работам</a>
+                </div>
+            `;
+            document.querySelector('.work-header').innerHTML = errorHtml;
+            document.querySelector('.work-slider-section')?.remove();
+            document.querySelector('.work-description-section')?.remove();
+            document.querySelector('.other-projects')?.remove();
+        }
+    </script>
+</body>
+</html>
