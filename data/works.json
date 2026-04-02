@@ -1,12 +1,12 @@
 {
   "1": {
-    "title": "Название проекта 1",
+    "title": "Coltimbr Сайт",
     "category": "Веб-сайт",
-    "year": "2024",
-    "client": "Клиент 1",
+    "year": "2026",
+    "client": "Иван",
     "platform": "Web",
     "role": "Lead Designer & Developer",
-    "technologies": [ "HTML5", "CSS3", "JavaScript", "React" ],
+    "technologies": [ "HTML5", "CSS3", "JavaScript" ],
     "liveLink": "#",
     "githubLink": "#",
     "description": "Полное описание проекта 1. Здесь рассказывается о том, что было сделано, какие задачи решались и какие результаты были достигнуты.",
@@ -14,11 +14,9 @@
     "solution": "Разработали адаптивный дизайн, использовали React для динамического контента, создали удобную админ-панель.",
     "result": "Клиент получил современный сайт, который увеличил конверсию на 30%.",
     "images": [
-      "../images/work1.jpg",
-      "../images/work2.jpg",
-      "../images/work3.jpg",
-      "../images/work4.jpg",
-      "../images/work5.jpg"
+      "../images/work-coltimbr-1.jpg",
+      "../images/work-coltimbr-2.jpg",
+      "../images/work-coltimbr-3.jpg"
     ]
   },
   "2": {
