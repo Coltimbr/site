@@ -246,7 +246,7 @@
                 const slide = document.createElement('div');
                 slide.className = 'swiper-slide';
                 slide.innerHTML = `
-                    <div class="slider-image-wrapper" onclick="openModal(${index})">
+                    <div class="slider-image-wrapper" data-index="${index}">
                         <img src="${img}" alt="${work.title} - фото ${index + 1}">
                         <div class="zoom-icon">🔍</div>
                     </div>
@@ -264,7 +264,7 @@
             // Инициализируем Swiper с более плавными настройками
             currentSwiper = new Swiper('.workSwiper', {
                 loop: true,
-                speed: 1000, // Увеличено для более плавной смены
+                speed: 1000,
                 effect: 'slide',
                 grabCursor: true,
                 simulateTouch: true,
@@ -285,9 +285,6 @@
                 keyboard: {
                     enabled: true,
                     onlyInViewport: true,
-                },
-                mousewheel: {
-                    forceToAxis: true,
                 },
             });
 
@@ -316,22 +313,29 @@
             if (document.querySelectorAll('.thumbnail').length > 0) {
                 document.querySelectorAll('.thumbnail')[0].classList.add('active');
             }
+
+            // Добавляем обработчики клика на фото
+            document.querySelectorAll('.slider-image-wrapper').forEach((wrapper, idx) => {
+                wrapper.addEventListener('click', () => {
+                    openModal(idx);
+                });
+            });
         }
 
-        // Модальное окно для увеличения фото
-        function openModal(startIndex) {
+        // Функции для модального окна (делаем глобальными)
+        window.openModal = function (startIndex) {
             // Создаем модальное окно
             const modal = document.createElement('div');
             modal.className = 'modal';
             modal.id = 'imageModal';
 
             modal.innerHTML = `
-                <div class="modal-close" onclick="closeModal()">×</div>
+                <div class="modal-close" id="modalCloseBtn">×</div>
                 <div class="modal-content">
                     <img class="modal-img" id="modalImage" src="" alt="Увеличенное фото">
                     <div class="modal-nav">
-                        <div class="modal-prev" onclick="changeModalImage(-1)">❮</div>
-                        <div class="modal-next" onclick="changeModalImage(1)">❯</div>
+                        <div class="modal-prev" id="modalPrev">❮</div>
+                        <div class="modal-next" id="modalNext">❯</div>
                     </div>
                     <div class="modal-counter" id="modalCounter"></div>
                 </div>
@@ -346,6 +350,11 @@
             // Показываем выбранное фото
             updateModalImage();
 
+            // Добавляем обработчики
+            document.getElementById('modalCloseBtn').onclick = closeModal;
+            document.getElementById('modalPrev').onclick = () => changeModalImage(-1);
+            document.getElementById('modalNext').onclick = () => changeModalImage(1);
+
             // Закрытие по клику на фон
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
@@ -355,7 +364,7 @@
 
             // Закрытие по Escape
             document.addEventListener('keydown', handleModalKeydown);
-        }
+        };
 
         function updateModalImage() {
             const modalImage = document.getElementById('modalImage');
@@ -367,7 +376,7 @@
             }
         }
 
-        function changeModalImage(direction) {
+        window.changeModalImage = function (direction) {
             let newIndex = window.currentModalIndex + direction;
 
             if (newIndex < 0) {
@@ -378,31 +387,26 @@
 
             window.currentModalIndex = newIndex;
             updateModalImage();
-        }
+        };
 
         function handleModalKeydown(e) {
             if (e.key === 'Escape') {
                 closeModal();
             } else if (e.key === 'ArrowLeft') {
-                changeModalImage(-1);
+                window.changeModalImage(-1);
             } else if (e.key === 'ArrowRight') {
-                changeModalImage(1);
+                window.changeModalImage(1);
             }
         }
 
-        function closeModal() {
+        window.closeModal = function () {
             const modal = document.getElementById('imageModal');
             if (modal) {
                 modal.remove();
                 document.body.style.overflow = '';
                 document.removeEventListener('keydown', handleModalKeydown);
             }
-        }
-
-        // Делаем функции глобальными
-        window.openModal = openModal;
-        window.closeModal = closeModal;
-        window.changeModalImage = changeModalImage;
+        };
 
         function loadOtherProjects() {
             const otherProjectsGrid = document.getElementById('otherProjects');
@@ -436,7 +440,8 @@
                     <a href="portfolio.html" class="btn btn-primary" style="margin-top: 2rem;">Вернуться к работам</a>
                 </div>
             `;
-            document.querySelector('.work-header').innerHTML = errorHtml;
+            const header = document.querySelector('.work-header');
+            if (header) header.innerHTML = errorHtml;
             document.querySelector('.work-slider-section')?.remove();
             document.querySelector('.work-description-section')?.remove();
             document.querySelector('.other-projects')?.remove();
