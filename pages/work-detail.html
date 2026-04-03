@@ -15,7 +15,7 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <a href="../index.html">Ваше Имя</a>
+                <a href="../index.html">Coltimbr</a>
             </div>
             <ul class="nav-menu">
                 <li><a href="../index.html">Главная</a></li>
@@ -175,6 +175,8 @@
 
         // Загружаем данные из JSON файла
         let worksData = {};
+        let currentImages = [];
+        let currentSwiper = null;
 
         fetch('../data/works.json')
             .then(response => response.json())
@@ -191,8 +193,10 @@
             const work = worksData[workId];
 
             if (work) {
+                currentImages = work.images;
+
                 // Заполняем заголовки
-                document.title = `${work.title} | Ваше портфолио`;
+                document.title = `${work.title} | Coltimbr`;
                 document.getElementById('workTitle').textContent = work.title;
                 document.getElementById('workMainTitle').textContent = work.title;
                 document.getElementById('workCategory').textContent = work.category;
@@ -221,77 +225,184 @@
                 document.getElementById('githubLink').href = work.githubLink;
 
                 // Создаем слайдер
-                const sliderWrapper = document.getElementById('workSlider');
-                const thumbnailsWrapper = document.getElementById('thumbnails');
-
-                work.images.forEach((img, index) => {
-                    // Добавляем слайд
-                    const slide = document.createElement('div');
-                    slide.className = 'swiper-slide';
-                    slide.innerHTML = `
-                        <div class="slider-image-wrapper">
-                            <img src="${img}" alt="${work.title} - фото ${index + 1}">
-                        </div>
-                    `;
-                    sliderWrapper.appendChild(slide);
-
-                    // Добавляем миниатюру
-                    const thumbnail = document.createElement('div');
-                    thumbnail.className = 'thumbnail';
-                    thumbnail.setAttribute('data-index', index);
-                    thumbnail.innerHTML = `<img src="${img}" alt="Миниатюра ${index + 1}">`;
-                    thumbnailsWrapper.appendChild(thumbnail);
-                });
-
-                // Инициализируем Swiper
-                const swiper = new Swiper('.workSwiper', {
-                    loop: true,
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true,
-                    },
-                    effect: 'slide',
-                    speed: 800,
-                    autoplay: {
-                        delay: 3000,
-                        disableOnInteraction: false,
-                    },
-                });
-
-                // Клик по миниатюре
-                document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
-                    thumb.addEventListener('click', () => {
-                        swiper.slideTo(index);
-                    });
-                });
-
-                // Активация текущей миниатюры при смене слайда
-                swiper.on('slideChange', () => {
-                    const activeIndex = swiper.realIndex;
-                    document.querySelectorAll('.thumbnail').forEach((thumb, idx) => {
-                        if (idx === activeIndex) {
-                            thumb.classList.add('active');
-                        } else {
-                            thumb.classList.remove('active');
-                        }
-                    });
-                });
-
-                // Активируем первую миниатюру
-                if (document.querySelectorAll('.thumbnail').length > 0) {
-                    document.querySelectorAll('.thumbnail')[0].classList.add('active');
-                }
+                createSlider(work);
             } else {
                 showError();
             }
 
-            // Загружаем другие проекты (первые 3, исключая текущий)
+            // Загружаем другие проекты
             loadOtherProjects();
         }
+
+        function createSlider(work) {
+            const sliderWrapper = document.getElementById('workSlider');
+            const thumbnailsWrapper = document.getElementById('thumbnails');
+
+            sliderWrapper.innerHTML = '';
+            thumbnailsWrapper.innerHTML = '';
+
+            work.images.forEach((img, index) => {
+                // Добавляем слайд
+                const slide = document.createElement('div');
+                slide.className = 'swiper-slide';
+                slide.innerHTML = `
+                    <div class="slider-image-wrapper" onclick="openModal(${index})">
+                        <img src="${img}" alt="${work.title} - фото ${index + 1}">
+                        <div class="zoom-icon">🔍</div>
+                    </div>
+                `;
+                sliderWrapper.appendChild(slide);
+
+                // Добавляем миниатюру
+                const thumbnail = document.createElement('div');
+                thumbnail.className = 'thumbnail';
+                thumbnail.setAttribute('data-index', index);
+                thumbnail.innerHTML = `<img src="${img}" alt="Миниатюра ${index + 1}">`;
+                thumbnailsWrapper.appendChild(thumbnail);
+            });
+
+            // Инициализируем Swiper с более плавными настройками
+            currentSwiper = new Swiper('.workSwiper', {
+                loop: true,
+                speed: 1000, // Увеличено для более плавной смены
+                effect: 'slide',
+                grabCursor: true,
+                simulateTouch: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true,
+                },
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                },
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: true,
+                },
+                mousewheel: {
+                    forceToAxis: true,
+                },
+            });
+
+            // Клик по миниатюре
+            document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+                thumb.addEventListener('click', () => {
+                    if (currentSwiper) {
+                        currentSwiper.slideToLoop(index);
+                    }
+                });
+            });
+
+            // Активация текущей миниатюры при смене слайда
+            currentSwiper.on('slideChange', () => {
+                const activeIndex = currentSwiper.realIndex;
+                document.querySelectorAll('.thumbnail').forEach((thumb, idx) => {
+                    if (idx === activeIndex) {
+                        thumb.classList.add('active');
+                    } else {
+                        thumb.classList.remove('active');
+                    }
+                });
+            });
+
+            // Активируем первую миниатюру
+            if (document.querySelectorAll('.thumbnail').length > 0) {
+                document.querySelectorAll('.thumbnail')[0].classList.add('active');
+            }
+        }
+
+        // Модальное окно для увеличения фото
+        function openModal(startIndex) {
+            // Создаем модальное окно
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.id = 'imageModal';
+
+            modal.innerHTML = `
+                <div class="modal-close" onclick="closeModal()">×</div>
+                <div class="modal-content">
+                    <img class="modal-img" id="modalImage" src="" alt="Увеличенное фото">
+                    <div class="modal-nav">
+                        <div class="modal-prev" onclick="changeModalImage(-1)">❮</div>
+                        <div class="modal-next" onclick="changeModalImage(1)">❯</div>
+                    </div>
+                    <div class="modal-counter" id="modalCounter"></div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+            document.body.style.overflow = 'hidden';
+
+            // Сохраняем текущий индекс
+            window.currentModalIndex = startIndex;
+
+            // Показываем выбранное фото
+            updateModalImage();
+
+            // Закрытие по клику на фон
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Закрытие по Escape
+            document.addEventListener('keydown', handleModalKeydown);
+        }
+
+        function updateModalImage() {
+            const modalImage = document.getElementById('modalImage');
+            const modalCounter = document.getElementById('modalCounter');
+
+            if (modalImage && currentImages[window.currentModalIndex]) {
+                modalImage.src = currentImages[window.currentModalIndex];
+                modalCounter.textContent = `${window.currentModalIndex + 1} / ${currentImages.length}`;
+            }
+        }
+
+        function changeModalImage(direction) {
+            let newIndex = window.currentModalIndex + direction;
+
+            if (newIndex < 0) {
+                newIndex = currentImages.length - 1;
+            } else if (newIndex >= currentImages.length) {
+                newIndex = 0;
+            }
+
+            window.currentModalIndex = newIndex;
+            updateModalImage();
+        }
+
+        function handleModalKeydown(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            } else if (e.key === 'ArrowLeft') {
+                changeModalImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeModalImage(1);
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            if (modal) {
+                modal.remove();
+                document.body.style.overflow = '';
+                document.removeEventListener('keydown', handleModalKeydown);
+            }
+        }
+
+        // Делаем функции глобальными
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+        window.changeModalImage = changeModalImage;
 
         function loadOtherProjects() {
             const otherProjectsGrid = document.getElementById('otherProjects');

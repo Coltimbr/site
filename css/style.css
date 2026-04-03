@@ -2018,3 +2018,179 @@ body {
         font-size: 1.5rem;
     }
 }
+/* ========== МОДАЛЬНОЕ ОКНО ДЛЯ ФОТО ========== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    cursor: pointer;
+    animation: modalFade 0.3s ease;
+}
+
+@keyframes modalFade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: modalZoom 0.3s ease;
+}
+
+@keyframes modalZoom {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 10000;
+}
+
+    .modal-close:hover {
+        color: var(--accent);
+        transform: scale(1.1);
+    }
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    pointer-events: none;
+}
+
+.modal-prev,
+.modal-next {
+    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 24px;
+}
+
+    .modal-prev:hover,
+    .modal-next:hover {
+        background: var(--accent);
+        transform: scale(1.1);
+    }
+
+.modal-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/* Улучшенный слайдер - более плавный */
+.workSwiper {
+    cursor: grab;
+}
+
+    .workSwiper:active {
+        cursor: grabbing;
+    }
+
+.swiper-slide {
+    transition: transform 0.4s ease;
+}
+
+.slider-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-dark);
+    cursor: pointer;
+}
+
+    .slider-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: var(--primary-dark);
+        transition: transform 0.3s ease;
+    }
+
+    .slider-image-wrapper:hover img {
+        transform: scale(1.02);
+    }
+
+/* Индикатор увеличения */
+.zoom-icon {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    color: white;
+    font-size: 20px;
+}
+
+.slider-image-wrapper:hover .zoom-icon {
+    opacity: 1;
+}
