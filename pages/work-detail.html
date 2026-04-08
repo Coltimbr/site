@@ -183,6 +183,7 @@
             .then(data => {
                 worksData = data;
                 loadWorkData();
+                console.log('Проверка ссылок:', worksData[workId]?.liveLink, worksData[workId]?.githubLink);
             })
             .catch(error => {
                 console.error('Ошибка загрузки данных:', error);

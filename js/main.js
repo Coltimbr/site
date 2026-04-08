@@ -7,18 +7,26 @@ hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
 });
 
-// Плавная прокрутка
+// Плавная прокрутка (только для внутренних якорей)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
+    const href = anchor.getAttribute('href');
+
+    // Пропускаем внешние ссылки и пустые
+    if (!href || href === '#' || href === '#!' || href === '#0') return;
+    if (href.includes('http')) return;
+    if (href.startsWith('#')) {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    }
 });
 
 // Анимация при прокрутке
